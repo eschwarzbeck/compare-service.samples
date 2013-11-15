@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="f73e2ac2-a952-4a40-9f63-3783d9fc192e" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost/StreamingService/LoadingService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="LoadingService.xsd" MetadataType="Schema" ID="d38b2c49-48bc-424e-9aa4-24ec08d34ca8" SourceId="1" SourceUrl="http://localhost/StreamingService/LoadingService.svc?xsd=xsd2" />
+    <MetadataFile FileName="LoadingService1.xsd" MetadataType="Schema" ID="5b10f4e9-3463-40b2-86b8-cee9591768ed" SourceId="1" SourceUrl="http://localhost/StreamingService/LoadingService.svc?xsd=xsd4" />
+    <MetadataFile FileName="LoadingService.disco" MetadataType="Disco" ID="91ac50a8-635e-45e4-9c58-bac22e8c7be3" SourceId="1" SourceUrl="http://localhost/StreamingService/LoadingService.svc?disco" />
+    <MetadataFile FileName="LoadingService.wsdl" MetadataType="Wsdl" ID="e3cf0a2a-b01c-4685-a94b-de75db7f34fc" SourceId="1" SourceUrl="http://localhost/StreamingService/LoadingService.svc?wsdl" />
+    <MetadataFile FileName="LoadingService1.wsdl" MetadataType="Wsdl" ID="af9a6c6e-3946-43ee-bac4-94dd9aa971d1" SourceId="1" SourceUrl="http://localhost/StreamingService/LoadingService.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="LoadingService2.xsd" MetadataType="Schema" ID="3a2b334c-6d36-4fdf-8ba4-4f49ed16b263" SourceId="1" SourceUrl="http://localhost/StreamingService/LoadingService.svc?xsd=xsd1" />
+    <MetadataFile FileName="LoadingService3.xsd" MetadataType="Schema" ID="f46c31d9-a7e9-4991-a350-93c6cc4eba86" SourceId="1" SourceUrl="http://localhost/StreamingService/LoadingService.svc?xsd=xsd0" />
+    <MetadataFile FileName="LoadingService4.xsd" MetadataType="Schema" ID="64f52de4-ff34-4899-a38a-c829d28de4f9" SourceId="1" SourceUrl="http://localhost/StreamingService/LoadingService.svc?xsd=xsd3" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

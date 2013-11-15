@@ -1,0 +1,7 @@
+﻿Chunking/Streaming is a way of uploading or downloading hughs files.  By the nature these at a while to transfer across the network, many minutes.  
+
+Various web servers will restrict the time that the session remains open without response to around a minute and therefore we run into time out exceptions or the server closed unexpectly.
+
+This service sample with be using streaming to allow hughs files to be uploaded or downloaded.  The service will be hosted in IIS and use Http Basic binding with security level of TransportCredentialOnly.
+
+To make a self signed cert for testing uses http://technet.microsoft.com/en-us/library/cc753127(WS.10).aspx

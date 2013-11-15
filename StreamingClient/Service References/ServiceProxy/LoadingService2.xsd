@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://workshare.com/compareservices/7.0/samples/message" elementFormDefault="qualified" targetNamespace="http://workshare.com/compareservices/7.0/samples/message" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost/StreamingService/LoadingService.svc?xsd=xsd2" namespace="http://workshare.com/compareservices/7.0/samples/" />
+  <xs:element name="FileUploadRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://workshare.com/compareservices/7.0/samples/" ref="q1:FileByteStream" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FileUploadResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://workshare.com/compareservices/7.0/samples/" minOccurs="0" ref="q2:SessionFileName" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

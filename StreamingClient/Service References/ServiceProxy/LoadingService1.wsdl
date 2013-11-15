@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://workshare.com/compareservices/7.0/samples/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://workshare.com/compareservices/7.0/samples/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="SampleWCF_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsoma:OptimizedMimeSerialization xmlns:wsoma="http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://workshare.com/compareservices/7.0/samples/Imports">
+      <xsd:import schemaLocation="http://localhost/StreamingService/LoadingService.svc?xsd=xsd1" namespace="http://workshare.com/compareservices/7.0/samples/message" />
+      <xsd:import schemaLocation="http://localhost/StreamingService/LoadingService.svc?xsd=xsd2" namespace="http://workshare.com/compareservices/7.0/samples/" />
+      <xsd:import schemaLocation="http://localhost/StreamingService/LoadingService.svc?xsd=xsd0" namespace="http://schemas.microsoft.com/Message" />
+      <xsd:import schemaLocation="http://localhost/StreamingService/LoadingService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost/StreamingService/LoadingService.svc?xsd=xsd4" namespace="http://workshare.com/compareservices/7.0/samples/data" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="FileUploadRequest">
+    <wsdl:part xmlns:q1="http://workshare.com/compareservices/7.0/samples/message" name="parameters" element="q1:FileUploadRequest" />
+  </wsdl:message>
+  <wsdl:message name="FileUploadRequest_Headers">
+    <wsdl:part name="Metadata" element="tns:Metadata" />
+  </wsdl:message>
+  <wsdl:message name="ILoadingService_Ping_InputMessage">
+    <wsdl:part name="parameters" element="tns:Ping" />
+  </wsdl:message>
+  <wsdl:message name="ILoadingService_Ping_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PingResponse" />
+  </wsdl:message>
+  <wsdl:message name="FileUploadResponse">
+    <wsdl:part xmlns:q2="http://workshare.com/compareservices/7.0/samples/message" name="parameters" element="q2:FileUploadResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ILoadingService">
+    <wsdl:operation name="UploadFile">
+      <wsdl:input wsaw:Action="UploadFile" name="FileUploadRequest" message="tns:FileUploadRequest" />
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <wsdl:input wsaw:Action="Ping" message="tns:ILoadingService_Ping_InputMessage" />
+      <wsdl:output wsaw:Action="http://workshare.com/compareservices/7.0/samples/ILoadingService/PingResponse" message="tns:ILoadingService_Ping_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadFile2">
+      <wsdl:input wsaw:Action="UploadFile2" name="FileUploadRequest" message="tns:FileUploadRequest" />
+      <wsdl:output wsaw:Action="http://workshare.com/compareservices/7.0/samples/ILoadingService/UploadFile2Response" name="FileUploadResponse" message="tns:FileUploadResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SampleWCF" type="tns:ILoadingService">
+    <wsp:PolicyReference URI="#SampleWCF_policy" />
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="UploadFile">
+      <soap:operation soapAction="UploadFile" style="document" />
+      <wsdl:input name="FileUploadRequest">
+        <soap:header message="tns:FileUploadRequest_Headers" part="Metadata" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <soap:operation soapAction="Ping" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadFile2">
+      <soap:operation soapAction="UploadFile2" style="document" />
+      <wsdl:input name="FileUploadRequest">
+        <soap:header message="tns:FileUploadRequest_Headers" part="Metadata" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="FileUploadResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+</wsdl:definitions>

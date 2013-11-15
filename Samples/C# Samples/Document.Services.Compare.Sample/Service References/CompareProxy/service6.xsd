@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://workshare.com/compareservices/1.1/comparewebservice/" elementFormDefault="qualified" targetNamespace="http://workshare.com/compareservices/1.1/comparewebservice/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Authenticate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="sDomain" type="xs:string" />
+        <xs:element minOccurs="0" maxOccurs="1" name="sUser" type="xs:string" />
+        <xs:element minOccurs="0" maxOccurs="1" name="sPass" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AuthenticateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="AuthenticateResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Execute">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="flags" type="tns:CompareResponseFlags" />
+        <xs:element minOccurs="0" maxOccurs="1" name="compareOptions" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="CompareResponseFlags">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Rtf" />
+      <xs:enumeration value="Xml" />
+      <xs:enumeration value="Both" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ExecuteResponse">
+    <xs:complexType />
+  </xs:element>
+  <xs:element name="Execute2">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="original" type="xs:base64Binary" />
+        <xs:element minOccurs="0" maxOccurs="1" name="modified" type="xs:base64Binary" />
+        <xs:element minOccurs="1" maxOccurs="1" name="flags" type="tns:CompareResponseFlags" />
+        <xs:element minOccurs="0" maxOccurs="1" name="compareOptions" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Execute2Response">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="Execute2Result" type="tns:CompareResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="CompareResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Redline" type="xs:base64Binary" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Summary">
+        <xs:complexType mixed="true">
+          <xs:sequence>
+            <xs:any />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

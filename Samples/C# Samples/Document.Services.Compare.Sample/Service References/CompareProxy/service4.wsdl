@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://workshare.com/compareservices/1.1/comparewebservice/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:i0="http://workshare.com/compareservices/5.0/comparewebservice/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Comparer" targetNamespace="http://workshare.com/compareservices/1.1/comparewebservice/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:import namespace="http://workshare.com/compareservices/5.0/comparewebservice/" location="" />
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://workshare.com/compareservices/1.1/comparewebservice/Imports">
+      <xsd:import schemaLocation="" namespace="http://workshare.com/compareservices/1.1/comparewebservice/" />
+      <xsd:import schemaLocation="" namespace="http://workshare.com/compareservices/5.0/comparewebservice/" />
+      <xsd:import schemaLocation="" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ILegacyComparer_Authenticate_InputMessage">
+    <wsdl:part name="parameters" element="tns:Authenticate" />
+  </wsdl:message>
+  <wsdl:message name="ILegacyComparer_Authenticate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AuthenticateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILegacyComparer_Execute_InputMessage">
+    <wsdl:part name="parameters" element="tns:Execute" />
+  </wsdl:message>
+  <wsdl:message name="ILegacyComparer_Execute_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ExecuteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILegacyComparer_Execute2_InputMessage">
+    <wsdl:part name="parameters" element="tns:Execute2" />
+  </wsdl:message>
+  <wsdl:message name="ILegacyComparer_Execute2_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Execute2Response" />
+  </wsdl:message>
+  <wsdl:portType name="ILegacyComparer">
+    <wsdl:operation name="Authenticate">
+      <wsdl:input wsaw:Action="http://workshare.com/compareservices/1.1/comparewebservice/Authenticate" message="tns:ILegacyComparer_Authenticate_InputMessage" />
+      <wsdl:output wsaw:Action="http://workshare.com/compareservices/1.1/comparewebservice/AuthenticateResponse" message="tns:ILegacyComparer_Authenticate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Execute">
+      <wsdl:input wsaw:Action="http://workshare.com/compareservices/1.1/comparewebservice/Execute" message="tns:ILegacyComparer_Execute_InputMessage" />
+      <wsdl:output wsaw:Action="http://workshare.com/compareservices/1.1/comparewebservice/ExecuteResponse" message="tns:ILegacyComparer_Execute_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Execute2">
+      <wsdl:input wsaw:Action="http://workshare.com/compareservices/1.1/comparewebservice/Execute2" message="tns:ILegacyComparer_Execute2_InputMessage" />
+      <wsdl:output wsaw:Action="http://workshare.com/compareservices/1.1/comparewebservice/Execute2Response" message="tns:ILegacyComparer_Execute2_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CompareWebServiceSoap" type="tns:ILegacyComparer">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Authenticate">
+      <soap:operation soapAction="http://workshare.com/compareservices/1.1/comparewebservice/Authenticate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Execute">
+      <soap:operation soapAction="http://workshare.com/compareservices/1.1/comparewebservice/Execute" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Execute2">
+      <soap:operation soapAction="http://workshare.com/compareservices/1.1/comparewebservice/Execute2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Comparer">
+    <wsdl:port name="CompareWebServiceWCF" binding="i0:CompareWebServiceWCF">
+      <soap:address location="http://ps-app-03/WCS/CompareWebService.svc/Compare5" />
+    </wsdl:port>
+    <wsdl:port name="CompareWebServiceSoap" binding="tns:CompareWebServiceSoap">
+      <soap:address location="http://ps-app-03/WCS/CompareWebService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

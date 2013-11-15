@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>XmlHttp Service Interop - Part 2</title> 
+    <script type="text/javascript">
+    
+    function AuthenticateAsync()
+{
+    try {
+        var data = '';
+       		
+        data += '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">';
+        data += '<soap:Body>';
+        data += '<Authenticate xmlns="http://www.workshare.com/services/compare/2007/07/">';
+        data += '<sRealm>DIS</sRealm>';
+        data += '<sUser>gilesr</sUser>';
+        data += '<sPassword>workshare</sPassword>';
+        data += '</Authenticate>';
+        data += '</soap:Body>';
+        data += '</soap:Envelope>';
+                      
+        var xmlhttp = new XMLHttpRequest( );          
+      
+        // WCF Service
+        xmlhttp.open('POST', 'http://localhost/worksharedocumentservices/WCFCompare.svc', true, "wsdev\lnpair", "lnpair");
+               
+        xmlhttp.onreadystatechange = function ( )
+                                    {
+                                        if(xmlhttp.readyState == 4)
+                                        {
+                                            alert(xmlhttp.responseText);
+                                        }
+                                    };
+        // WCF 
+	 	xmlhttp.setRequestHeader('SOAPAction', 'http://www.workshare.com/services/compare/2007/07/IComparer/Authenticate');	 		 
+	 	
+	 	xmlhttp.setRequestHeader('Content-Type', 'text/xml');
+        var res = xmlhttp.send(data);
+      
+		/*
+			Sample output:
+
+			<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+			  <s:Body>
+				<SendResponse xmlns="http://www.netfxharmonics.com/servics/notification/2007/03/">
+				  <SendResult>0</SendResult>
+				</SendResponse>
+			  </s:Body>
+			</s:Envelope>
+		*/
+
+    }
+    catch(ex){
+        alert('Error:' + ex);
+    }
+};
+
+    
+    </script>
+</head>
+<body>
+ <a class="browselink" href="javascript:void(null);" id="AuthenticateAsync" onclick="AuthenticateAsync()">Test Async Authenticate</a>				   
+<label id="lblAsyncResult" width="581px" height="36px"> AuthenticateAsync will be displayed here.</label>
+</body>
+</html>

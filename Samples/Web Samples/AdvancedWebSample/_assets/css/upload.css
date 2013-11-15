@@ -1,0 +1,78 @@
+﻿.upload
+{
+	border-color: #800000;
+	margin: 0px;
+	border-width: 3px;
+	padding-top: 0px;
+	width: 640px;
+	background-color: #FFFFFF;
+	background-repeat: repeat-y;
+	background-image: url(../img/white-middle.png);
+}
+.upload H3
+{
+	margin: 0;
+	padding-bottom: 5px;
+	font-size: 14px;
+}
+.upload IFRAME
+{
+	text-align: center;
+	vertical-align: middle;
+	border-style: none;
+	margin: 0px;
+}
+#status, .commands
+{
+	height: 25px;
+	line-height: 25px;
+	display: block;
+	padding-left: 20px;
+}
+
+.hidden
+{
+	display: none;
+}
+
+#status.error
+{
+	color: Red;
+}
+#status.info
+{
+	color: #333;
+}
+#status.infopane
+{
+	padding: 10px;
+	border: 1px solid #D4E2EA;
+	color: #333;
+	background-color: #F0F4F6;
+	margin-right: 20px;
+	margin-left: 20px;
+	height: 50px;
+	vertical-align: middle;
+	font-family: Arial;
+	font-size: 12px;
+}
+#status.success
+{
+	color: green;
+}
+
+.pairinfo
+{
+	color: #333;
+	font-family: Arial;
+	font-size: 12px;
+}
+
+.loader
+{
+	padding: 25px;
+	z-index: 0;
+	width: 8px;
+	height: 8px;
+	cursor: progress;
+}
