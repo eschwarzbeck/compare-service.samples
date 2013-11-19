@@ -1,7 +1,7 @@
 compare-service.samples
 -----------------------
 
-This repository contains development samples for Workshare Compare Server. It is intended to be a a quick-start demonstration of how to build a Compare Server based solution, and do not necessarily demonstrate best practices.
+This repository contains development samples for Workshare Compare Server. It is intended to be a a quick-start demonstration of how to build a Compare Server based solution, and does not necessarily demonstrate best practices.
 
 A full set of documentation for Compare Server, including the developer's guide, can be found at the following link:
 
