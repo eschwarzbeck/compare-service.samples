@@ -5,7 +5,7 @@ This repository contains development samples for Workshare Compare Server. It is
 
 A full set of documentation for Compare Server, including the developer's guide, can be found at the following link:
 
-http://workshare.force.com/knowledgebase/articles/Help_Articles/Workshare-Compare-Server-7-documentation/
+http://workshare.force.com/knowledgebase/pkb_Home?l=en_US&c=Product%3AWorkshare_Compare_Server
 
 ### License
 Copyright 2013 Workshare 
