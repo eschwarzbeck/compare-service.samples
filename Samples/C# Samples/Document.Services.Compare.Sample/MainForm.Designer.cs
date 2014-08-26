@@ -149,12 +149,15 @@ namespace Workshare.Document.Services.Compare.Sample
             this.comboOptionsSets.IntegralHeight = false;
             this.comboOptionsSets.Items.AddRange(new object[] {
             "Default",
+            "NoImages",
+            "Standard",
             "NoColourSet",
             "NoMovesSet",
             "CaretForDeletesSet",
             "ChangeNumbersSet",
             "FontChangesSet",
             "ShadingSet"});
+
             this.comboOptionsSets.Location = new System.Drawing.Point(236, 107);
             this.comboOptionsSets.Name = "comboOptionsSets";
             this.comboOptionsSets.Size = new System.Drawing.Size(252, 21);
@@ -539,7 +542,7 @@ namespace Workshare.Document.Services.Compare.Sample
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Workshare Compare Service Sample - v7.10";
+            this.Text = "Workshare Compare Service Sample - v";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupDocSelection.ResumeLayout(false);
             this.groupDocSelection.PerformLayout();

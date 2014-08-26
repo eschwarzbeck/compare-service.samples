@@ -1,0 +1,11 @@
+.classpath
+.project
+*.class
+bin/
+webdeploypackage/
+webpackages/
+Build/Samples/
+Build/Websites/
+.metadata/
+.settings/
+lib/

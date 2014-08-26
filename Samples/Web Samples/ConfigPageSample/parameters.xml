@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<parameters>
+  <parameter name="Compare Service bin folder location" description="Please provide the Compare Service bin folder location"
+              defaultValue="C:\Program Files\Workshare\Compare Service\bin" tags="">
+    <parameterEntry kind="XmlFile" scope="\\web.config$" match="/configuration/appSettings/add[@key='HostFolder']/@value" />
+  </parameter>
+  <parameter name="Log folder location" description="Please provide the Compare Service log folder location" 
+            defaultValue="C:\Program Files\Workshare\Compare Service\logs" tags="">
+    <parameterEntry kind="XmlFile" scope="\\web.config$" match="/configuration/appSettings/add[@key='LogsFolder']/@value" />
+  </parameter>
+  <parameter name="Chart Image Handler" description=""
+              defaultValue="storage=file;timeout=20;Url=~/TempImageFiles/;" tags="">
+    <parameterEntry kind="XmlFile" scope="\\web.config$" match="/configuration/appSettings/add[@key='ChartImageHandler']/@value" />
+  </parameter>
+</parameters>

@@ -1,0 +1,33 @@
+
+
+.ellipse{
+	float: left;
+}
+
+.list-navigation
+{
+	height: 30px;
+}
+
+.list-navigation a {
+	padding:3px 5px;
+	margin:2px;
+	color:white;
+	text-decoration:none;
+	float: left;
+	font-family: Tahoma;
+	font-size: 12px;
+	background-color:#aeaeae;
+}
+.active_page{
+	background-color:white !important;
+	color:black !important;
+}	
+
+.content, .alt_content{
+    /*	color: black; */
+}
+
+.content li, .alt_content li, .content > p{
+	/*padding: 5px */
+}

@@ -17,17 +17,16 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8080/Comparer" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:8080/Comparer/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Comparer.xsd" MetadataType="Schema" ID="44efa07d-e73b-4bef-a642-6767e6100411" SourceId="1" SourceUrl="http://localhost:8080/Comparer?xsd=xsd1" />
-    <MetadataFile FileName="Comparer.wsdl" MetadataType="Wsdl" ID="4f9c483f-5e34-48e1-8b55-4e2dc0cb1166" SourceId="1" SourceUrl="http://localhost:8080/Comparer?wsdl=wsdl0" />
-    <MetadataFile FileName="Comparer1.wsdl" MetadataType="Wsdl" ID="f7723325-6dbe-4de5-98af-ce0bf7bc92e6" SourceId="1" SourceUrl="http://localhost:8080/Comparer?wsdl=wsdl1" />
-    <MetadataFile FileName="Comparer.disco" MetadataType="Disco" ID="c3d1889b-cd5c-46df-9369-ce9263069a01" SourceId="1" SourceUrl="http://localhost:8080/Comparer?disco" />
-    <MetadataFile FileName="Comparer1.xsd" MetadataType="Schema" ID="9cd89ac3-6427-407c-a76f-0a3aa21a87fe" SourceId="1" SourceUrl="http://localhost:8080/Comparer?xsd=xsd3" />
-    <MetadataFile FileName="Comparer2.wsdl" MetadataType="Wsdl" ID="93e9fc92-bf92-4300-af8f-7aa834bb9ff4" SourceId="1" SourceUrl="http://localhost:8080/Comparer?wsdl" />
-    <MetadataFile FileName="Comparer2.xsd" MetadataType="Schema" ID="89869c8c-5790-48e9-9885-bc8fe40657df" SourceId="1" SourceUrl="http://localhost:8080/Comparer?xsd=xsd0" />
-    <MetadataFile FileName="Comparer3.xsd" MetadataType="Schema" ID="4ea0c573-2c61-49ad-8c8c-f85c338ce5d3" SourceId="1" SourceUrl="http://localhost:8080/Comparer?xsd=xsd2" />
+    <MetadataFile FileName="service2.wsdl" MetadataType="Wsdl" ID="79276fe8-5c68-4d4c-829c-1b89b8e0dc5f" SourceId="1" SourceUrl="http://localhost:8080/Comparer/mex" />
+    <MetadataFile FileName="service3.wsdl" MetadataType="Wsdl" ID="101b1bda-306f-4f46-857a-60c77e6c8c55" SourceId="1" SourceUrl="http://localhost:8080/Comparer/mex" />
+    <MetadataFile FileName="service4.wsdl" MetadataType="Wsdl" ID="25a2e7b0-5f0a-4d96-b93d-f452f03ec994" SourceId="1" SourceUrl="http://localhost:8080/Comparer/mex" />
+    <MetadataFile FileName="service3.xsd" MetadataType="Schema" ID="43b71f6f-141f-4e2f-a4af-282f300f2503" SourceId="1" SourceUrl="http://localhost:8080/Comparer/mex" />
+    <MetadataFile FileName="service4.xsd" MetadataType="Schema" ID="13669f63-bbda-4e4f-b59d-58e7572ca31e" SourceId="1" SourceUrl="http://localhost:8080/Comparer/mex" />
+    <MetadataFile FileName="service5.xsd" MetadataType="Schema" ID="42ada055-43b9-4232-a48e-2c61b9c77a99" SourceId="1" SourceUrl="http://localhost:8080/Comparer/mex" />
+    <MetadataFile FileName="service6.xsd" MetadataType="Schema" ID="5ffe8ee6-a6b4-4cb0-8e78-825122946f45" SourceId="1" SourceUrl="http://localhost:8080/Comparer/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

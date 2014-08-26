@@ -1,0 +1,73 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" Strict="true" %>
+<%@ Import Namespace="CompareServer.WebAdmin.Controllers" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <title>
+        <asp:ContentPlaceHolder ID="TitleContent" runat="server" />
+    </title>
+    <meta http-equiv="X-UA-Compatible" content="IE=100" />
+    <link href="<%= Url.Content("~/Сontent/images/favicon.ico") %>" rel="Shortcut Icon" type="image/ico" />
+    <link href="<%= Url.Content("~/Content/Css/blueprint/screen.css") %>" rel="stylesheet" type="text/css" media="screen, projection"/>
+    <link href="<%= Url.Content("~/Content/Css/blueprint/print.css") %>" rel="stylesheet" type="text/css" media="print" />
+    <link href="<%= Url.Content("~/Content/css/site.css") %>" rel="stylesheet" type="text/css" media="screen, projection" />
+    <link href="<%= Url.Content("~/Content/jquery/themes/base/jquery.ui.all.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%= Url.Content("~/Content/Css/tooltip.css") %>" rel="stylesheet" type="text/css" media="screen, projection" />
+    <link href="<%= Url.Content("~/Content/Css/rules.css") %>" rel="stylesheet" type="text/css" media="screen, projection" />
+    <asp:ContentPlaceHolder ID="CssPlaceHolder" runat="server" />
+
+    <script src="<%= Url.Content("~/Scripts/jquery-1.7.1.min.js") %>" type="text/javascript"></script>
+    <script src="<%= Url.Content("~/Scripts/jquery-ui-1.8.17.custom.min.js") %>" type="text/javascript"></script>
+    <script src="<%= Url.Content("~/Scripts/jquery.validate.min.js") %>" type="text/javascript"></script>
+    <script src="<%= Url.Content("~/Scripts/Site.js") %>" type="text/javascript"></script>
+    <script src="<%= Url.Content("~/Scripts/MicrosoftAjax.debug.js") %>" type="text/javascript"></script>
+    <script src="<%= Url.Content("~/Scripts/MicrosoftMvcAjax.debug.js") %>" type="text/javascript"></script>
+    <script src="<%= Url.Content("~/Scripts/MicrosoftMvcValidation.debug.js") %>" type="text/javascript"></script>
+    <asp:ContentPlaceHolder ID="ScriptPlaceHolder" runat="server" />
+    <% Html.EnableClientValidation(); %>
+</head>
+<body>
+    <div id="header">
+        <h1>Compare Server</h1>
+        <p id="authorization">Logged in as <span style="color:Red">: <%= Page.User.Identity.Name %></span></p>
+    </div>
+    <div id="primary-navigation">
+        <h2 class="hidden">Site Menu</h2>
+        <%
+            var controller = ViewContext.Controller as CompareControllerBase;            
+        %>
+        <ul>
+            <li <%= controller.IsCurrentController("Home") ? "class=\"selected\"":""  %> id="home-menu-item" >
+                    <a href="<%= Url.Action("Index", HomeController.ControllerName) %>"><span>Home</span></a></li>
+            <li <%= controller.IsCurrentController("Logging") ? "class=\"selected\"":""  %> id="logging-menu-item" >
+                    <a href="<%= Url.Action("Audit", LoggingController.ControllerName) %>"><span>Logging</span></a></li>
+            <li <%= controller.IsCurrentController("Performance") ? "class=\"selected\"":"" %> id="performance-menu-item">
+                    <a href="<%= Url.Action("Index", PerformanceController.ControllerName) %>"><span>Performance</span></a></li>
+            <li <%= controller.IsCurrentController("Auditing") ? "class=\"selected\"":"" %> id="auditing-menu-item">
+                    <a href="<%= Url.Action("Index", AuditingController.ControllerName) %>"><span>Auditing</span></a></li>
+            <li <%= controller.IsCurrentController("RenderingSet") ? "class=\"selected\"":"" %> id="renderingset-menu-item">
+                    <a href="<%= Url.Action("Index", RenderingSetController.ControllerName) %>"><span>RenderingSet</span></a></li>        
+        </ul>
+    </div>
+
+    <div id="page-contents">
+        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+
+    <div id="footer">
+        <span class="logo">Workshare</span>
+        <%  System.Reflection.Assembly assembly = System.Reflection.Assembly.Load("CompareServer.WebAdmin");
+            string version = System.Diagnostics.FileVersionInfo.GetVersionInfo(assembly.Location).FileVersion;
+            var metadata = "1.0.0.0"; %>
+            <div id="versions">
+                <p>Web Interface:
+                <%= version %><br />
+                Engine:
+                <%= metadata %></p>
+            </div>
+        </div>
+</body>
+</html>

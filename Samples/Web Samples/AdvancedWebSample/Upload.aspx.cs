@@ -15,7 +15,10 @@ using System.Collections.Generic;
 using Document.Services.Compare.Control;
 using System.Web.Configuration;
 using System.Drawing;
+using Document.Services.Compare.Control.ComparerProxy;
 using Microsoft.Win32;
+using CompareResults = Document.Services.Compare.Control.CompareResults;
+using ResponseOptions = Document.Services.Compare.Control.ResponseOptions;
 
 namespace Workshare.Samples.AdvWebSample
 {
@@ -59,15 +62,19 @@ namespace Workshare.Samples.AdvWebSample
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			InitConfigVariables();
-			
-			if (this.IsPostBack)
+
+            if (Session["BeenAuthenticated"] == null)
+                Session["BeenAuthenticated"] = false;
+
+
+			if (IsPostBack)
 			{
-				bool beenAuthenticated = (bool) this.Session["BeenAuthenticated"];
+				bool beenAuthenticated = (bool) Session["BeenAuthenticated"];
 
 				if (beenAuthenticated)
 				{
 					// Need session based path to save files locally
-					_sessionBasePath = Path.Combine(_tempDataPath, this.Session.SessionID);
+					_sessionBasePath = Path.Combine(_tempDataPath, Session.SessionID);
 					
 					// Do the actual file processing and comparison stuff
 					ProcessFilesAndDoComparison();
@@ -75,10 +82,10 @@ namespace Workshare.Samples.AdvWebSample
 			}
 			else
 			{
-				this.Session["ShowResults"] = false;
+				Session["ShowResults"] = false;
 
-				if (this.Session["BeenAuthenticated"] == null )
-					this.Session["BeenAuthenticated"] = false;
+				if (Session["BeenAuthenticated"] == null )
+					Session["BeenAuthenticated"] = false;
 
 				// Decide  what to show and update the page UI
 				UpdatePageUI();
@@ -97,7 +104,7 @@ namespace Workshare.Samples.AdvWebSample
 		/// <param name="e"></param>
 		private void CompareService_OnDataSent(object sender, DataSentArgs e)
 		{
-			UploadInfo uploadInfo = this.Session["UploadInfo"] as UploadInfo;
+			UploadInfo uploadInfo = Session["UploadInfo"] as UploadInfo;
 
 			if (uploadInfo == null)
 			{			
@@ -140,7 +147,7 @@ namespace Workshare.Samples.AdvWebSample
 		/// <param name="e"></param>
 		private void CompareService_OnComparisonStarted(object sender, EventArgs e)
 		{
-			UploadInfo uploadInfo = this.Session["UploadInfo"] as UploadInfo;
+			UploadInfo uploadInfo = Session["UploadInfo"] as UploadInfo;
 			if (uploadInfo == null)
 			{
 				return;
@@ -169,10 +176,10 @@ namespace Workshare.Samples.AdvWebSample
 				if (compareService.VerifyConnection(out serviceVersion, out compositorVersion))
 				{
 					// Store the gems for later use
-					this.Session["BeenAuthenticated"] = true;
-					this.Session["Passw"] = CodePassword(PasswordTextBox.Text);
-					this.Session["UserName"] = UsernameTextBox.Text;
-					this.Session["Domain"] = DomainTextBox.Text;
+					Session["BeenAuthenticated"] = true;
+					Session["Passw"] = CodePassword(PasswordTextBox.Text);
+					Session["UserName"] = UsernameTextBox.Text;
+					Session["Domain"] = DomainTextBox.Text;
 
 					string versionString = "Service: {0} - Compositor: {1}";
 					versionString = string.Format(versionString, serviceVersion, compositorVersion);
@@ -185,7 +192,7 @@ namespace Workshare.Samples.AdvWebSample
 				}
 				else
 				{
-					this.Session["BeenAuthenticated"] = false;
+					Session["BeenAuthenticated"] = false;
 
 					string message = "Authentication failed for user: {0}";
 					message = string.Format(message, UsernameTextBox.Text);
@@ -304,7 +311,7 @@ namespace Workshare.Samples.AdvWebSample
 				}
 
 				// Upload object used by Default.aspx to report progress to the user
-				uploadInfo = this.Session["UploadInfo"] as UploadInfo;
+				uploadInfo = Session["UploadInfo"] as UploadInfo;
 
 				uploadInfo.IsReady = false;
 				uploadInfo.UsePercentComplete = false;
@@ -352,7 +359,7 @@ namespace Workshare.Samples.AdvWebSample
 					uploadInfo.Message = "Starting comparison ...";
 
 					// Perform comparison
-					CompareResults results = DoComparison(originalPostedFile.InputStream, modifiedPostedFile.InputStream, optionSet, responseOptions, ref uploadInfo);
+					CompareResults results = DoComparison(originalPostedFile, modifiedPostedFile, optionSet, responseOptions, ref uploadInfo);
 
 					if (results != null)
 					{
@@ -490,7 +497,7 @@ namespace Workshare.Samples.AdvWebSample
 			}
 			virtualFilePath = virtualFilePath.Replace('\\', '/');
 
-			string filepath = this.Server.MapPath(virtualFilePath);
+			string filepath = Server.MapPath(virtualFilePath);
 
 			//  build the structure and stuff it into session
 			uploadInfo.ContentLength = postedFile.ContentLength;
@@ -556,7 +563,7 @@ namespace Workshare.Samples.AdvWebSample
 		/// <param name="responseOptions"></param>
 		/// <param name="uploadInfo"></param>
 		/// <returns></returns>
-		private CompareResults DoComparison(Stream originalFile, Stream modifiedFile, string optionSet, ResponseOptions responseOptions, ref UploadInfo uploadInfo)
+		private CompareResults DoComparison(HttpPostedFile originalPostedFile, HttpPostedFile modifiedPostedFile, string optionSet, ResponseOptions responseOptions, ref UploadInfo uploadInfo)
 		{
 			ICompareService compareService = CreateAppropriateService();
 			compareService.ComparisonStarted += new EventHandler(CompareService_OnComparisonStarted);
@@ -566,9 +573,9 @@ namespace Workshare.Samples.AdvWebSample
 			uploadInfo.PercentComplete = 10;
 			uploadInfo.Message = "Authenticating request ...";
 
-			string username = (string)this.Session["UserName"];
-			string domain = (string)this.Session["Domain"];
-			string password = (string)this.Session["Passw"];
+			string username = (string)Session["UserName"];
+			string domain = (string)Session["Domain"];
+			string password = (string)Session["Passw"];
 			password = CodePassword(password);
 			compareService.SetClientCredentials(username, password, domain);
 
@@ -592,13 +599,16 @@ namespace Workshare.Samples.AdvWebSample
 			compareService.UseChunking = true;
 			compareService.ChunkSize = _chunkSize;
 
+		    var originalFile = originalPostedFile.InputStream;
+		    var modifiedFile = modifiedPostedFile.InputStream;
+
 			originalFile.Seek(0, SeekOrigin.Begin);
 			modifiedFile.Seek(0, SeekOrigin.Begin);
 
 			// As _lastModifiedFileIndex is zero-based, so increment it befor displaying
 			uploadInfo.PairInfo = "Comparing File Pair " + (_lastModifiedFileIndex + 1).ToString();
 
-			CompareResults results = compareService.Compare(originalFile, modifiedFile);
+			CompareResults results = compareService.CompareEx(originalFile, modifiedFile, CreateDocumentInfo(originalPostedFile.FileName), CreateDocumentInfo(modifiedPostedFile.FileName));
 
 			uploadInfo.PercentComplete = 100;
 			uploadInfo.Message = "Comparison completed ...";
@@ -607,7 +617,12 @@ namespace Workshare.Samples.AdvWebSample
 			return results;
 		}
 
-		#endregion
+	    private DocumentInfo CreateDocumentInfo(string fileName)
+	    {
+	        return new DocumentInfo() {DocumentSource = fileName, DocumentDescription = fileName};
+	    }
+
+	    #endregion
 
 		#region Show Results 
 		
@@ -721,18 +736,18 @@ namespace Workshare.Samples.AdvWebSample
 		/// <param name="comparisonResult"></param>
 		private void DisplayResults(ComparisonResult comparisonResult)
 		{
-			this.Session["ShowResults"] = true;
+			Session["ShowResults"] = true;
 			UpdatePageUI();
 
 			// Prepare hyperlink for Original file
 			string fileName = Path.GetFileName(comparisonResult._originalFile);
 			string fileSize = string.Format("({0} KB)", Math.Round(comparisonResult._originalFileSizeInKB, 2));
-			this.OriginalFilePathLabel.Text = "<a href='" + comparisonResult._originalFile + "'>" + fileName + "</a> " + fileSize ;
+			OriginalFilePathLabel.Text = "<a href='" + comparisonResult._originalFile + "'>" + fileName + "</a> " + fileSize ;
 
 			// Remove the extension from rendering-set name, if present
-			this.RenderingSetLabel.Text = Path.GetFileNameWithoutExtension(comparisonResult._renderingSet);
+			RenderingSetLabel.Text = Path.GetFileNameWithoutExtension(comparisonResult._renderingSet);
 
-			this.ResultFiles.Rows.Clear();
+			ResultFiles.Rows.Clear();
 			foreach (ResultantFiles files in comparisonResult._resultantFiles)
 			{
 				// Actually add the rows to results table
@@ -752,10 +767,10 @@ namespace Workshare.Samples.AdvWebSample
 		/// <param name="files"></param>
 		private void UpdateResultsTable(ResultantFiles files)
 		{
-			this.ResultFiles.Rows.Add(CreateHeaderRow(files._modifiedFile));
-			this.ResultFiles.Rows.Add(CreateModifiedFileRow(files._modifiedFile, files._modifiedFileSizeInKB));
-			this.ResultFiles.Rows.Add(CreateOutputFileRow(files._outputFile, files._outputFileSizeInKB));
-			this.ResultFiles.Rows.Add(CreateSummaryRow(files._summaryFile, files._summaryFileSizeInKB));
+			ResultFiles.Rows.Add(CreateHeaderRow(files._modifiedFile));
+			ResultFiles.Rows.Add(CreateModifiedFileRow(files._modifiedFile, files._modifiedFileSizeInKB));
+			ResultFiles.Rows.Add(CreateOutputFileRow(files._outputFile, files._outputFileSizeInKB));
+			ResultFiles.Rows.Add(CreateSummaryRow(files._summaryFile, files._summaryFileSizeInKB));
 		}
 
 		/// <summary>
@@ -948,26 +963,30 @@ namespace Workshare.Samples.AdvWebSample
 		/// </summary>
 		private void UpdatePageUI()
 		{
-			bool beenAuthenticated = (bool) this.Session["BeenAuthenticated"];
+			bool beenAuthenticated = (bool) Session["BeenAuthenticated"];
+
+            if (Session["ShowResults"] == null)
+                Session["ShowResults"] = false;
+
 
 			// If the user is authenticated, we either show upload screen, or results screen
 			// depending upon whats the value for Session["ShowResults"];
 			if (beenAuthenticated)
 			{
-				bool showResults = (bool) this.Session["ShowResults"];
+				bool showResults = (bool) Session["ShowResults"];
 				if (showResults)
 				{
-					this.ResultsDiv.Style.Add("display", "block");
-					this.LoginDiv.Style.Add("display", "none");
-					this.UploadFilesDiv.Style.Add("display", "none");
+					ResultsDiv.Style.Add("display", "block");
+					LoginDiv.Style.Add("display", "none");
+					UploadFilesDiv.Style.Add("display", "none");
 
-					this.Session["ShowResults"] = false;
+					Session["ShowResults"] = false;
 				}
 				else
 				{
-					this.UploadFilesDiv.Style.Add("display", "block");
-					this.ResultsDiv.Style.Add("display", "none");
-					this.LoginDiv.Style.Add("display", "none");
+					UploadFilesDiv.Style.Add("display", "block");
+					ResultsDiv.Style.Add("display", "none");
+					LoginDiv.Style.Add("display", "none");
 
 					ToggleUploadButtonAndStatusPane(true);
 				}
@@ -975,9 +994,9 @@ namespace Workshare.Samples.AdvWebSample
 			else
 			{
 				// If not authenticated, show login screen.
-				this.LoginDiv.Style.Add("display", "block");
-				this.UploadFilesDiv.Style.Add("display", "none");
-				this.ResultsDiv.Style.Add("display", "none");
+				LoginDiv.Style.Add("display", "block");
+				UploadFilesDiv.Style.Add("display", "none");
+				ResultsDiv.Style.Add("display", "none");
 
 				ToggleUploadButtonAndStatusPane(false);
 

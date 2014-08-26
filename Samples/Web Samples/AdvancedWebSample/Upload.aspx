@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" Inherits="Workshare.Samples.AdvWebSample.Upload" CodeFile="Upload.aspx.cs"
+﻿<%@ Page Language="C#" Inherits="Workshare.Samples.AdvWebSample.Upload" CodeBehind="Upload.aspx.cs"
     EnableSessionState="ReadOnly" Async="true" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

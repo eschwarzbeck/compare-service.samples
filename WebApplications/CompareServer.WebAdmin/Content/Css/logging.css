@@ -1,0 +1,83 @@
+﻿
+#logging-menu
+{
+    width: 20%;
+    float: left;
+}
+
+#logging-menu ul
+{
+    margin: 0px 5px 0px 0px;
+    list-style-type: none;
+}
+
+#logging-menu ul li
+{
+    margin-bottom: 5px;
+    height: 34px;
+    cursor: pointer;
+}
+
+#logging-menu ul li a
+{
+    color: #555555;
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    background-image: url('../images/menu_back.png');
+    background-repeat: repeat-x;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:medium;
+    line-height: 34px;
+    text-align: center;
+}
+
+#logging-menu ul li a:hover
+{
+    background-image: url('../images/menu_back_hover.png');
+}
+
+#logging-menu ul li.selected a
+{
+    background-image: url('../images/menu_back_selected.png');
+}
+
+
+#logging-view
+{
+    width: 80%;
+    float:left;
+}
+
+.log-item-left
+{
+    float:left;
+    height: 100%;
+    width: 29%;
+    overflow: hidden;
+    background-color: #d7d1d1;
+}
+
+.log-item-left span
+{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+
+.log-item-mid
+{
+    height: 100%;
+    width: 70%;
+    background-color: #e1e1e1;
+    float: right;
+}
+
+.log-list-container ul li
+{
+    height: 80px;    
+}
+

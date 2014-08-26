@@ -4,8 +4,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Reflection;
 using System.Security.AccessControl;
 using System.Security.Principal;
+using System.ServiceModel;
+using System.ServiceModel.Configuration;
 using System.Text;
 using System.Windows.Forms;
 using System.Configuration;
@@ -19,10 +22,13 @@ namespace Workshare.Document.Services.Compare.Sample
 	{
 		// Supported input formats for the Original/Modified browse dialogs
 		private const string m_sSupportedInputFormats = "Word Documents (*.docx)|*.docx|Word 97-2003 (*.doc)|*.doc|Rich Text (*.rtf)|*.rtf|PDF Documents (*.pdf)|*.pdf|Web Pages (*.htm; *.html)|*.htm;*.html";
+	    private readonly bool _securityEnabled = false;
 
 		public MainForm()
 		{
 			InitializeComponent();
+
+		    this.Text += Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
 			/// -------------------------------------------------------------------------
 
@@ -37,9 +43,32 @@ namespace Workshare.Document.Services.Compare.Sample
 
 			textHost.Text = ConfigurationManager.AppSettings["DefaultHost"];
 
-			textUsername.Text = Environment.UserName;
-			textDomain.Text = Environment.UserDomainName;
+            // Will throw exception if there is a configuration error
+            var clientSection = (ClientSection)ConfigurationManager.GetSection("system.serviceModel/client");
+            // By default security is disabled
+            // Check Compare service binding type in configuration file
+            foreach (ChannelEndpointElement endpoint in clientSection.Endpoints)
+            {
+                if (!endpoint.Name.Equals("CompareWebServiceWCF")) continue;
 
+                if (endpoint.Binding.Equals("wsHttpBinding", StringComparison.InvariantCultureIgnoreCase))
+                    _securityEnabled = true;
+                break;
+            }
+            
+            if (_securityEnabled)
+            {
+                textUsername.Text = Environment.UserName;
+                textDomain.Text = Environment.UserDomainName;
+            }
+            else
+            {
+                // Disable security
+                textDomain.Enabled = false;
+                textPassword.Enabled = false;
+                textUsername.Enabled = false;    
+            }
+            
 			comboOptionsSets.SelectedIndex = 0;
 			cboConvert.SelectedIndex = 0;
 
@@ -139,8 +168,8 @@ namespace Workshare.Document.Services.Compare.Sample
 
 		private void butCompare_Click(object sender, EventArgs e)
 		{
-			// Check for empty passwords
-			if (!PasswordIsValid())
+			// Check for empty passwords if security is enabled
+			if (_securityEnabled && !PasswordIsValid())
 				return;
 
 			// Disable the UI while we run the comparison
@@ -170,17 +199,24 @@ namespace Workshare.Document.Services.Compare.Sample
 			// This code demonstrates connecting to the Compare service via the WSHttp binding
 			// which ensures more secure transport and data compression.
 			CompareProxy.ComparerClient svcCompare = new CompareProxy.ComparerClient("CompareWebServiceWCF", textHost.Text);
-			svcCompare.ClientCredentials.Windows.ClientCredential.UserName = textUsername.Text;
-			svcCompare.ClientCredentials.Windows.ClientCredential.Password = textPassword.Text;
-			svcCompare.ClientCredentials.Windows.ClientCredential.Domain = textDomain.Text;
-            //svcCompare.ClientCredentials.Windows.AllowNtlm = true;
-            //svcCompare.ClientCredentials.Windows.AllowedImpersonationLevel = TokenImpersonationLevel.Impersonation;
+            
 
-
+            if (_securityEnabled)
+            {
+                svcCompare.ClientCredentials.Windows.ClientCredential.UserName = textUsername.Text;
+                svcCompare.ClientCredentials.Windows.ClientCredential.Password = textPassword.Text;
+                svcCompare.ClientCredentials.Windows.ClientCredential.Domain = textDomain.Text;
+                //svcCompare.ClientCredentials.Windows.AllowNtlm = true;
+                //svcCompare.ClientCredentials.Windows.AllowedImpersonationLevel = TokenImpersonationLevel.Impersonation;    
+            }
+			
 			try
 			{
-				// Always call Authenticate as the first operation and use the same Client Credentials
-				if (svcCompare.Authenticate(textDomain.Text, textUsername.Text, textPassword.Text))
+                // Always call Authenticate as the first operation and use the same Client Credentials
+			    bool isAuthenticated = !_securityEnabled || (_securityEnabled &&
+			                           svcCompare.Authenticate(textDomain.Text, textUsername.Text, textPassword.Text));
+
+				if (isAuthenticated)
 				{
 					// Determine which option was specified for the
 					// result of the comparison.  RTF, XML, WDF etc.
@@ -227,41 +263,67 @@ namespace Workshare.Document.Services.Compare.Sample
                         desiredResults |= CompareProxy.ResponseOptions.RedlinMl;
                     }
 
+                    // Run the comparison
+                    var originalInfo = new DocumentInfo()
+                    {
+                        DocumentDescription = Path.GetFileName(textBoxOriginal.Text),
+                        DocumentSource = textBoxOriginal.Text
+                    };
+                    var modifiedInfo = new DocumentInfo()
+                    {
+                        DocumentDescription = Path.GetFileName(textBoxModified.Text),
+                        DocumentSource = textBoxModified.Text
+                    };
+                    var executeParams = new ExecuteParams
+                    {
+                        Modified = System.IO.File.ReadAllBytes(textBoxModified.Text),
+                        Original = System.IO.File.ReadAllBytes(textBoxOriginal.Text),
+                        ResponseOption = desiredResults,
+                        OriginalDocumentInfo = originalInfo,
+                        ModifiedDocumentInfo = modifiedInfo
+                    };
 
-					string sCompareOptions = "";
-
+					
 					// If a server-side option set has been specifed then call SetOptionsSet
 					if (checkUseDefaultOptionsSet.Checked)
 					{
 						if (comboOptionsSets.SelectedIndex != 0)
 						{
-							svcCompare.SetOptionsSet(comboOptionsSets.Text);
+							if (svcCompare.SetOptionsSet(comboOptionsSets.Text))
+                            {// The option set is defined on the server 
+							    
+							    if (!_securityEnabled)
+							    {
+                                    //As Sessions are not supported with basic Http binding, 
+                                    //the name of the server-side option must be specified
+							        executeParams.CompareOptionInfo = comboOptionsSets.Text;
+							    }
+							} // else This is not an existing server-side option set
+							
 						}
 
-						//To use the default server-side options set just set the options string to "".
+                        //To use a server-side options set just set the options string to "".
+					    executeParams.CompareOptions = string.Empty;
 					}
 					else
 					{
 						// If using client-side options set then load
 						// the options from the specified file.
-						sCompareOptions = GetCompareOptions();
+                        executeParams.CompareOptions = GetCompareOptions();
+					    executeParams.CompareOptionInfo = textBoxOptionSet.Text;
 					}
 
-					// Run the comparison
-					//var executeParams = new ExecuteParams
-					//                        {
-					//                            CompareOptions = sCompareOptions,
-					//                            Modified = System.IO.File.ReadAllBytes(textBoxModified.Text),
-					//                            Original = System.IO.File.ReadAllBytes(textBoxOriginal.Text),
-					//                            ResponseOption = desiredResults
-					//                        };
+					
 
-					CompareProxy.CompareResults cr = svcCompare.Execute(System.IO.File.ReadAllBytes(textBoxOriginal.Text),
-																		System.IO.File.ReadAllBytes(textBoxModified.Text),
-																		desiredResults,
-																		sCompareOptions);
+                    CompareResults cr = svcCompare.ExecuteEx(executeParams);
 
-					//CompareResults cr = svcCompare.ExecuteEx(executeParams);
+                    //Comparison without documents details
+//					CompareProxy.CompareResults cr = svcCompare.Execute(System.IO.File.ReadAllBytes(textBoxOriginal.Text),
+//																		System.IO.File.ReadAllBytes(textBoxModified.Text),
+//																		desiredResults,
+//																		sCompareOptions);
+
+					
 
 					// Always close the service connection as soon as possible after use.
 					svcCompare.Close();
@@ -511,7 +573,7 @@ namespace Workshare.Document.Services.Compare.Sample
 		private void butTestConnection_Click(object sender, EventArgs e)
 		{
 			// Check for empty passwords
-			if (!PasswordIsValid())
+            if (_securityEnabled && !PasswordIsValid())
 				return;
 
 			// Disable UI

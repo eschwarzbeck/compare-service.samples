@@ -7,7 +7,6 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyTitle("Workshare.Document.Services.Compare.Sample")]
 [assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
 
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM

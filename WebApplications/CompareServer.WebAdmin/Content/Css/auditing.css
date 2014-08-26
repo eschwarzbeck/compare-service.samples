@@ -1,0 +1,53 @@
+﻿
+.auditing-list-item-container
+{
+    margin: 3px 0px;
+}
+
+.auditing-list-item-container div
+{
+    display: inline-block;
+    margin: 0px 2px;
+}
+
+.auditing-list-item-name
+{
+    width: 300px;
+    background-color: #f1f1f1;
+}
+
+.auditing-list-item-bytes
+{
+    width: 150px;
+    background-color: #f1f1f1;
+    text-align: right;
+}
+
+.auditing-list-item-num
+{
+    width: 150px;
+    background-color: #f1f1f1;
+    text-align: right;    
+}
+
+.auditing-list-item-time
+{
+    width: 150px;
+    background-color: #f1f1f1;
+    text-align: right;
+}
+
+#audit-items-list
+{
+    list-style-type: none;
+}
+
+#audit-items-list li
+{
+    margin: 2px 0px;
+}
+
+#audit-list-header
+{
+        
+}

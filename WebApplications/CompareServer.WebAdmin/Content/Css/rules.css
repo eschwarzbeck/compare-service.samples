@@ -1,0 +1,29 @@
+/********************************************************************************
+ * Workshare Protect Server
+ ********************************************************************************
+ * Copyright © Workshare Inc.  All rights reserved.
+ *
+ * THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY
+ * OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT
+ * LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE.
+ ********************************************************************************/
+ 
+.ui-widget-overlay 
+{
+    background: #000;
+    /*opacity: .40;*/
+}
+
+.ui-dialog
+{
+    /*--CSS3 Box Shadows--*/
+	-webkit-box-shadow: 0px 0px 20px #333;
+	-moz-box-shadow: 0px 0px 20px #333;
+	/*box-shadow: 0px 0px 20px #333; */
+	
+	/*--CSS3 Rounded Corners--*/
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	/*border-radius: 10px; */
+}

@@ -1,0 +1,26 @@
+﻿
+.spinner
+{
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-image: url('../images/loading.gif');
+    border-style: hidden;
+    border-width: 0px;
+}
+
+.list-errors
+{
+    margin-top: 10px;
+    width: 100%;   
+}
+
+.list-errors ul
+{
+    list-style-type: none;
+}
+
+.list-errors ul li
+{
+    background-color: #fef1f1;
+}

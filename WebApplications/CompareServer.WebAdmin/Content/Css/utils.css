@@ -1,0 +1,79 @@
+﻿
+.range-container
+{
+    
+}
+
+.range-select
+{
+    float:left;
+    margin: 0.4em 0em 0.4em 0.4em;    
+}
+
+.range-opt-container
+{
+    float:left;
+    width: 220px;
+    height: 100%;
+    overflow: hidden;
+    padding-left: 10px;
+}
+
+.date-select
+{
+    
+}
+
+input.date-select
+{
+    width: 70px;
+    height: 18px;
+    margin: 0.4em 0em 0.4em 0.4em;
+    padding: 0px;
+}
+
+.spinner
+{
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-image: url('../images/loading.gif');
+    border-style: hidden;
+    border-width: 0px;
+}
+
+.list-errors
+{
+    margin-top: 10px;
+    width: 100%;   
+}
+
+.list-errors ul
+{
+    list-style-type: none;
+}
+
+.list-errors ul li
+{
+    background-color: #fef1f1;
+}
+
+.data-load-spinner
+{
+    visibility: hidden;
+    vertical-align: middle;
+    padding: 0em 0.2em;
+    width: 110px;
+}
+
+.data-load-spinner img
+{
+    float: left;
+    margin-top: 0.5em;
+}
+
+.data-load-spinner div
+{
+    margin-top: 0.5em;
+    margin-left: 0.2em;
+}

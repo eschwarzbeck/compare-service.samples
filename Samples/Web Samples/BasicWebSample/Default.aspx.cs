@@ -17,8 +17,8 @@ public partial class _Default : System.Web.UI.Page
 
 	#region Data Members
 
-	private string sRenderSetPath = "data/renderset";
-	private string sTempDataPath = "data/temp";
+    private string sRenderSetPath = "App_Data/renderset";
+    private string sTempDataPath = "App_Data/temp";
 	private string sSessionBasePath;
 
 	#endregion
@@ -88,8 +88,17 @@ public partial class _Default : System.Web.UI.Page
 			string sRenderingSet = RenderingSetDropDownList.SelectedValue;
 			string sOptionSet = File.ReadAllText(Request.MapPath(Path.Combine(sRenderSetPath, sRenderingSet)));
 
+		    ExecuteParams executeParams = new ExecuteParams()
+		        {
+		            CompareOptions = sOptionSet,
+		            ResponseOption = responseOptions,
+		            Original = original,
+		            Modified = modified,
+		            OriginalDocumentInfo = new DocumentInfo() {DocumentDescription = Path.GetFileName(sOriginalFile), DocumentSource = Path.GetFileName(sOriginalFile)},
+		            ModifiedDocumentInfo = new DocumentInfo() {DocumentDescription = Path.GetFileName(sModifiedFile), DocumentSource = Path.GetFileName(sModifiedFile)},
+		        };
 			// Peform comparison
-			CompareResults results = cp.Execute(original, modified, responseOptions, sOptionSet);
+			CompareResults results = cp.ExecuteEx(executeParams);
 
 			// Prepare and Display results.
 			HandleResults(results, responseOptions, sOriginalFile, sModifiedFile, sRenderingSet, sVirtualPath);
@@ -571,8 +580,8 @@ public partial class _Default : System.Web.UI.Page
 		sOriginalFileVirtualPath = sVirtualPath.Replace('\\', '/');
 		sOriginalFileVirtualPath = Path.Combine(sOriginalFileVirtualPath, sFileName);
 
-		sOriginalFilePath = Server.HtmlEncode(sOriginalFilePath);
-		OriginalFilePathLabel.Text = "<a href='" + sOriginalFileVirtualPath + "' target='_blank'>" + sFileName + "</a>";
+        sOriginalFilePath = Encode(sOriginalFilePath);
+		OriginalFilePathLabel.Text = "<a href='" + Encode(sOriginalFileVirtualPath) + "' target='_blank'>" + sFileName + "</a>";
 		RenederingSetLabel.Text = sRenderingSet;
 
 		// Prepare paths/labels for Output file
@@ -605,14 +614,14 @@ public partial class _Default : System.Web.UI.Page
 		{
 			sFileName = Path.GetFileName(sModifiedFilePath);
 			sModifiedFileVirtualPath = Path.Combine(sVirtualPath, sFileName);
-			sModifiedFileVirtualPath = Server.HtmlEncode(sModifiedFileVirtualPath);
+            sModifiedFileVirtualPath = Encode(sModifiedFileVirtualPath);
 		}
 
 		if (sOutputFileVirtualPath != string.Empty)
-			sOutputFileVirtualPath = Server.HtmlEncode(sOutputFileVirtualPath);
+			sOutputFileVirtualPath = Encode(sOutputFileVirtualPath);
 
 		if (sSummaryFileVirtualPath != string.Empty)
-			sSummaryFileVirtualPath = Server.HtmlEncode(sSummaryFileVirtualPath);
+            sSummaryFileVirtualPath = Encode(sSummaryFileVirtualPath);
 
 
 		// Prepare and show the results table
@@ -620,6 +629,11 @@ public partial class _Default : System.Web.UI.Page
 
 	}
 
-	#endregion
+    private string Encode(string path)
+    {
+        return Server.HtmlEncode(path.Replace('\\', '/'));
+    }
+
+    #endregion
 
 }

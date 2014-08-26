@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" elementFormDefault="qualified" targetNamespace="http://workshare.com/compareservices/5.0/comparewebservice/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:element name="Authenticate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sRealm" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sUser" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sPassword" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AuthenticateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AuthenticateResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetVersion">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetVersionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetVersionResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCompositorVersion">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCompositorVersionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetCompositorVersionResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOptionsSet">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOptionsSetResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetOptionsSetResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetOptionsSet">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sOptionsSet" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetOptionsSetResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SetOptionsSetResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Execute">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="OriginalData" nillable="true" type="xs:base64Binary" />
+        <xs:element minOccurs="0" name="ModifiedData" nillable="true" type="xs:base64Binary" />
+        <xs:element xmlns:q1="http://workshare.com/compareservices/5.0/comparewebservice/" minOccurs="0" name="ResponseOption" type="q1:ResponseOptions" />
+        <xs:element minOccurs="0" name="CompareOptions" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="ResponseOptions">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Rtf">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Xml">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RtfWithSummary">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Wdf">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="WdfWithSummary">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">6</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Doc">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DocWithSummary">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">10</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DocX">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">16</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DocXWithSummary">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">18</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Pdf">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">32</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PdfWithSummary">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">34</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RedlinMl">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">64</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RedlinMlAndRtf">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">65</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RedlinMlAndSummary">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">66</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RedlinMlAndRtfAndSummary">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">67</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RedlinMlAndDoc">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">72</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RedlinMlAndDocAndSummary">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">74</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RedlinMlAndDocX">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">80</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RedlinMlAndDocXAndSummary">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">82</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RedlinMlAndPdf">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">96</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RedlinMlAndPdfAndSummary">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">98</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element xmlns:q2="http://workshare.com/compareservices/5.0/comparewebservice/" name="ResponseOptions" nillable="true" type="q2:ResponseOptions" />
+  <xs:element name="ExecuteResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://workshare.com/compareservices/5.0/comparewebservice/" minOccurs="0" name="ExecuteResult" nillable="true" type="q3:CompareResults" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="CompareResults">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Redline" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="RedlineMl" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Summary" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q4="http://workshare.com/compareservices/5.0/comparewebservice/" name="CompareResults" nillable="true" type="q4:CompareResults" />
+  <xs:element name="ExecuteEx">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://workshare.com/compareservices/5.0/comparewebservice/" minOccurs="0" name="execParams" nillable="true" type="q5:ExecuteParams" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ExecuteParams">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CompareOptions" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Modified" nillable="true" type="xs:base64Binary" />
+      <xs:element xmlns:q6="http://workshare.com/compareservices/5.0/comparewebservice/" minOccurs="0" name="ModifiedDocumentInfo" nillable="true" type="q6:DocumentInfo" />
+      <xs:element minOccurs="0" name="Original" nillable="true" type="xs:base64Binary" />
+      <xs:element xmlns:q7="http://workshare.com/compareservices/5.0/comparewebservice/" minOccurs="0" name="OriginalDocumentInfo" nillable="true" type="q7:DocumentInfo" />
+      <xs:element xmlns:q8="http://workshare.com/compareservices/5.0/comparewebservice/" minOccurs="0" name="ResponseOption" type="q8:ResponseOptions" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q9="http://workshare.com/compareservices/5.0/comparewebservice/" name="ExecuteParams" nillable="true" type="q9:ExecuteParams" />
+  <xs:complexType name="DocumentInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DocumentDescription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DocumentSource" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q10="http://workshare.com/compareservices/5.0/comparewebservice/" name="DocumentInfo" nillable="true" type="q10:DocumentInfo" />
+  <xs:element name="ExecuteExResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://workshare.com/compareservices/5.0/comparewebservice/" minOccurs="0" name="ExecuteExResult" nillable="true" type="q11:CompareResults" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Ping">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PingResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://workshare.com/compareservices/5.0/comparewebservice/" minOccurs="0" name="PingResult" nillable="true" type="q12:CompareResults" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ChunkedExecuteParams">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CompareOptions" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Modified" type="ser:guid" />
+      <xs:element xmlns:q13="http://workshare.com/compareservices/5.0/comparewebservice/" minOccurs="0" name="ModifiedDocumentInfo" nillable="true" type="q13:DocumentInfo" />
+      <xs:element minOccurs="0" name="Original" type="ser:guid" />
+      <xs:element xmlns:q14="http://workshare.com/compareservices/5.0/comparewebservice/" minOccurs="0" name="OriginalDocumentInfo" nillable="true" type="q14:DocumentInfo" />
+      <xs:element xmlns:q15="http://workshare.com/compareservices/5.0/comparewebservice/" minOccurs="0" name="ResponseOption" type="q15:ResponseOptions" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q16="http://workshare.com/compareservices/5.0/comparewebservice/" name="ChunkedExecuteParams" nillable="true" type="q16:ChunkedExecuteParams" />
+</xs:schema>

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<parameters>
+  <parameter name="Rendering set location" description=""
+              defaultValue="C:\ProgramData\Workshare\Compare Service\Rendering Sets" tags="">
+    <parameterEntry kind="XmlFile" scope="\\web.config$" match="/configuration/appSettings/add[@key='renderset.path']/@value" />
+  </parameter>
+  <parameter name="Endpoint Address" description=""
+                defaultValue="http://localhost:8080/Comparer/Compare5" tags="">
+    <parameterEntry kind="XmlFile" scope="\\web.config$" match="/configuration/appSettings/add[@key='EndpointAddress']/@value" />
+  </parameter>
+</parameters>

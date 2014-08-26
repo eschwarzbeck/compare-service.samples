@@ -1142,7 +1142,7 @@
 				&nbsp;
 			</td>
 			<td class="copyrightNotice" style="width: 250px; height: 20px;">
-				©2013 Workshare, Inc. All rights reserved.
+				©2014 Workshare, Inc. All rights reserved.
 			</td>
 			<td class="copyrightNotice" style="width: 10px; height: 20px;">
 				|

@@ -1,0 +1,39 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewMasterPage" %>
+
+<asp:Content ID="TitleContent1" ContentPlaceHolderID="TitleContent" runat="server">
+    <asp:ContentPlaceHolder ID="LoggingTitle" runat="server"></asp:ContentPlaceHolder>    
+</asp:Content>
+
+<asp:Content ID="ScriptContent1" ContentPlaceHolderID="ScriptPlaceHolder" runat="server">
+    <script src="<%= Url.Content("~/Scripts/pajinate/jquery.pajinate.js")    %>" type="text/javascript" ></script>
+    <script src="<%= Url.Content("~/Scripts/utils.js")    %>" type="text/javascript" ></script>
+    <script src="<%= Url.Content("~/Scripts/logging.js")    %>" type="text/javascript" ></script>
+    <asp:ContentPlaceHolder ID="LoggingScriptPlaceHolder" runat="server" />
+</asp:Content>
+
+<asp:Content ID="CssContent1" ContentPlaceHolderID="CssPlaceHolder" runat="server">
+    <link href="<%= Url.Content("~/Content/Css/pajinate/styles.css") %>" rel="Stylesheet" type="text/css" />
+    <link href="<%= Url.Content("~/Content/Css/utils.css") %>" rel="Stylesheet" type="text/css" />
+    <link href="<%= Url.Content("~/Content/Css/logging.css") %>" rel="Stylesheet" type="text/css" />
+    <link href="<%= Url.Content("~/Content/Css/list.css") %>" rel="Stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="LoggingCssPlaceHolder" runat="server" />
+</asp:Content>
+
+<asp:Content ID="MainContent1" ContentPlaceHolderID="MainContent" runat="server">
+    <div id="logging-menu">
+        <%  
+            string actionName = "";
+            if (ViewContext.RouteData.Values["Action"] != null)
+            {
+                actionName = ViewContext.RouteData.Values["Action"].ToString();
+            }  %>
+        <ul>
+            <li <%= (actionName == "Audit") ? "class='selected'":""%>><%= Html.ActionLink("Audit",  "Audit" ) %></li>
+            <li <%= (actionName == "Host") ? "class='selected'":""%>><%= Html.ActionLink("Host",   "Host"  )  %></li>
+            <li <%= (actionName == "System") ? "class='selected'":""%>><%= Html.ActionLink("System", "System" ) %></li>
+        </ul>
+    </div>
+    <div id="logging-view">
+        <asp:ContentPlaceHolder ID="LoggingMain" runat="server"></asp:ContentPlaceHolder>
+    </div>
+</asp:Content>

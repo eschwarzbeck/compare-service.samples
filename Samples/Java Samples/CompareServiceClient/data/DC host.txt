@@ -1,0 +1,1 @@
+http://sf2-comp-01.wsdemo.net/wcs/comparewebservice.svc

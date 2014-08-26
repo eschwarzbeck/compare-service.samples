@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" Inherits="Workshare.Samples.AdvWebSample._Default" CodeFile="Default.aspx.cs" %>
+﻿<%@ Page Language="C#" Inherits="Workshare.Samples.AdvWebSample._Default" CodeBehind="Default.aspx.cs" %>
 
 <%@ Register Assembly="MattBerseth.WebControls.AJAX" Namespace="MattBerseth.WebControls.AJAX.Progress"
     TagPrefix="mb" %>

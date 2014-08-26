@@ -1,0 +1,68 @@
+﻿body {
+}
+
+.perf-control
+{
+    padding-left: 10px;
+    margin-top: 10px;
+    border: 1px solid #C2CAD1;
+    background-color: #E6E9EB;
+    width: 100%;
+    height: 30px;
+}
+
+.perf-control select
+{
+    float:left;
+}
+
+.perf-control div
+{
+    float:left;    
+}
+
+
+.perf-control input[type=text], .perf-control select
+{
+    margin: 0.4em 0.2em;
+}
+
+.perf-control input[type=button]
+{
+    margin: 0.2em 0.2em;    
+}
+
+.perf-service-status img
+{
+    width: 15px;
+    height: 15px;
+    margin-top: 0.5em;
+    margin-left: 0.1em;
+    margin-right: 0.3em;
+    vertical-align: middle;
+}
+
+.perf-service-status div
+{
+    margin-top: 0.5em;
+    margin-left: 0.3em;
+}
+
+.perf-service-status
+{
+    margin-left: 50px;    
+}
+
+
+.data-load-spinner
+{
+    width: 200px;
+}
+
+#comparisons
+{
+    width: 100%;
+    height: 300px;
+    margin-top: 20px;
+    border: 1px solid #E3E6E9;
+}

@@ -1,0 +1,80 @@
+﻿
+#rs-content
+{
+    margin-top: 15px;
+    font-size: 15px; 
+}
+
+#rs-list 
+{
+    list-style-type: none;
+}
+
+#rs-list li 
+{
+    background-color: #f6f9fb;
+}
+
+
+#rs-list div
+{
+    margin-top: 4px;
+}
+
+#rs-list div:hover
+{
+    background-color: #f1f1fe;    
+}
+
+#rs-upload-list
+{
+    list-style-type: none;
+    width: 500px;
+}
+
+#rs-upload-button-container
+{
+    width: 70px;
+    height: 50px;
+}
+
+.rs-upload-item
+{
+    height: 15px;
+    overflow: hidden;
+}
+
+.rs-upload-spinner
+{
+    width: 15px;
+    background-image: url('../images/loading.gif');
+    float: left;
+}
+
+.rs-upload-size
+{
+    width: 20px;
+    float: left;
+}
+
+.rs-upload-file
+{
+    width: 200px;
+    margin-left: 20px;
+}
+
+.rs-list-button
+{
+    width: 16px;
+    height: 16px;
+    background-image: url('../images/icons/201.png');
+    background-repeat: no-repeat;
+    cursor: pointer;
+    float: right;
+}
+
+.rs-list-file
+{
+    padding: 0.1em 0.5em;
+    cursor: default;
+}

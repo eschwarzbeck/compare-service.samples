@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="b8a06186-7edd-4b9f-992c-db7a7b8ecd1e" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8889/Comparer/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service3.wsdl" MetadataType="Wsdl" ID="273c9885-6cb0-4ad1-b9a4-9b9e6f83a875" SourceId="1" SourceUrl="http://localhost:8889/Comparer/mex" />
+    <MetadataFile FileName="service31.wsdl" MetadataType="Wsdl" ID="f71e521b-175d-4605-bf12-272863c911d7" SourceId="1" SourceUrl="http://localhost:8889/Comparer/mex" />
+    <MetadataFile FileName="service32.wsdl" MetadataType="Wsdl" ID="1ba2b24a-283a-4a35-adef-766a82bf17b2" SourceId="1" SourceUrl="http://localhost:8889/Comparer/mex" />
+    <MetadataFile FileName="service33.wsdl" MetadataType="Wsdl" ID="b86cca1a-dfab-41ea-a7ee-e65f78a24bd5" SourceId="1" SourceUrl="http://localhost:8889/Comparer/mex" />
+    <MetadataFile FileName="service4.xsd" MetadataType="Schema" ID="afb64c22-0087-4517-aa58-4d385348402c" SourceId="1" SourceUrl="http://localhost:8889/Comparer/mex" />
+    <MetadataFile FileName="service41.xsd" MetadataType="Schema" ID="1b342429-4c29-4d7f-8d8e-5d96d937e10f" SourceId="1" SourceUrl="http://localhost:8889/Comparer/mex" />
+    <MetadataFile FileName="service42.xsd" MetadataType="Schema" ID="2591c2ca-a27d-4c91-96ca-672782f733ec" SourceId="1" SourceUrl="http://localhost:8889/Comparer/mex" />
+    <MetadataFile FileName="service43.xsd" MetadataType="Schema" ID="96021119-be21-4e81-9bb9-bce66a1adc1c" SourceId="1" SourceUrl="http://localhost:8889/Comparer/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
