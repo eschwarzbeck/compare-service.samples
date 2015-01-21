@@ -18,6 +18,7 @@ The following code is available in **Compare Service Samples.sln**.
 *Samples/C# Samples/Document.Services.Compare.Sample*
 
 C# application connects to the Workshare Compare service using a direct synchronous request/response method. 
+You can find a pre-compiled version on the [releases page](https://github.com/workshare/compare-service.samples/releases)
 
 ### [AdvancedWebSample](Samples/Web Samples/AdvancedWebSample/readme.md)
 *Samples/Web Samples/AdvancedWebSample*
